@@ -1,8 +1,23 @@
-import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
-const Loader = () =>
-  <svg className='spinner' width='65px' height='65px' viewBox='0 0 66 66' xmlns='http://www.w3.org/2000/svg'>
-     <circle className='path' fill='none' strokeWidth='6' strokeLinecap='round' cx='33' cy='33' r='30'></circle>
-  </svg>
+const loading = keyframes`
+  0% {
+    transform: rotate(0deg);
+    color: #4285F4;
+  }
+  25% { color: #DE3E35; }
+  50% { color: #F7C223; }
+  75% { color: #1B9A59; }
+  100% {
+    transform: rotate(360deg);
+    color: #4285F4;
+  }
+`
+
+const Loader = styled.i`
+  display: block;
+  font-size: 1.2rem;
+  animation: ${loading} .5s linear infinite;
+`
 
 export default Loader

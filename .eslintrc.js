@@ -19,7 +19,6 @@ module.exports = {
     "array-bracket-spacing": [ "error", "always" ],
     "arrow-spacing": [ "error" ],
     "block-spacing": [ "error" ],
-    "camelcase": [ "error" ],
     "computed-property-spacing": [ "error", "never" ],
     "curly": [ "error", "all" ],
     "eqeqeq": [ "error", "always" ],
@@ -44,7 +43,6 @@ module.exports = {
     "object-curly-spacing": [ "error", "always" ],
     "quotes": [ "error", "single" ],
     "semi": [ "error", "never" ],
-    "yoda": [ "error" ],
-    "react/prop-types": 0,
+    "yoda": [ "error" ]
   }
 };

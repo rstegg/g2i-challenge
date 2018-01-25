@@ -1,54 +1,63 @@
+// @flow
+
 import React, { Component } from 'react'
+import PropTypes, { Props } from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import Hero from 'elements/Hero'
-import Section from 'elements/Section'
+import Section from '../../elements/Section'
+import Button from '../../elements/Button'
+import Hero from '../../elements/Hero'
 
-import { refreshQuiz } from '../../redux/actions/quiz'
+import { resetQuiz } from '../../redux/actions/quiz'
 
-class Home extends Component {
+class Home extends Component<Props> {
   componentDidMount() {
-    this.props.refreshQuiz()
+    if (this.props.quiz.answered) {
+      this.props.resetQuiz()
+    }
   }
   render() {
     return (
-      <div className='home-container'>
-        <Hero>
-          <Hero.Title>Ryan Stegmann</Hero.Title>
-          <Hero.Subtitle>Mobile & Web App developer, Javascript Junkie, & Functional Fanatic</Hero.Subtitle>
-        </Hero>
-        <div className='home'>
-          <div className='container'>
-            <Section title='Welcome to the Trivia Challenge!'>
-              <br />
-              <div className='content home-content'>
-                <p>You will be presented with 10 True or False questions.</p>
-                <div className='home-quicklinks'>
-                  <h2>Can you score 100%?</h2>
-                  <div className='section home-quicklinks__group'>
-                    <NavLink to='/quiz' className='button is-medium'>
-                      BEGIN
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            </Section>
-          </div>
-        </div>
-      </div>
+      <Section>
+        <Section.Container>
+          <Section.Title>Welcome to the Trivia Challenge</Section.Title>
+          <Section.Content>
+            <p>You will be presented with 10 True or False questions.</p>
+            <Hero.Home>
+              <Hero.Body>
+                <Hero.HomeContainer>
+                  <Hero.Title>Can you score 100%?</Hero.Title>
+                  <Hero.Subtitle>
+                    <Button>
+                      <NavLink to='/quiz'>
+                        Begin
+                      </NavLink>
+                    </Button>
+                  </Hero.Subtitle>
+                </Hero.HomeContainer>
+              </Hero.Body>
+            </Hero.Home>
+          </Section.Content>
+        </Section.Container>
+      </Section>
     )
   }
 }
 
-const mapStateToProps = ({  }) =>
-({
+Home.propTypes = {
+  quiz: PropTypes.object.isRequired,
+  resetQuiz: PropTypes.func.isRequired,
+}
 
+const mapStateToProps = ({ quiz }) =>
+({
+  quiz
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  refreshQuiz: () => dispatch(refreshQuiz())
+  resetQuiz: () => dispatch(resetQuiz())
 })
 
 export default connect(

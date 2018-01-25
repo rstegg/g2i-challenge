@@ -1,8 +1,10 @@
+// @flow
+
 import { combineEpics } from 'redux-observable'
 import {
   onFetchQuizSuccess,
   onFetchQuizFailure,
-} from 'actions/quiz'
+} from '../actions/quiz'
 
 import su from 'superagent'
 

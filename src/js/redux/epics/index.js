@@ -1,3 +1,5 @@
+// @flow
+
 import { combineEpics } from 'redux-observable'
 
 import quizEpics from './quiz'

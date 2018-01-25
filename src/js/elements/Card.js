@@ -1,77 +1,65 @@
-import React from 'react'
-import { generateIcon } from 'utils/helpers'
-import { pipe, split, head, last } from 'ramda'
+import styled from 'styled-components'
 
-const imageName =
-  pipe(
-    split('/'),
-    last,
-    split('.'),
-    head
-  )
+const Card = styled.div`
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  color: #4A4A4A;
+  max-width: 100%;
+  position: relative;
+  @media screen and (min-width: 1025px), print {
+    width: 300px;
+    margin: 25px;
+    max-width: 100%;
+    overflow: hidden;
+  }
+`
 
-const Card = ({ as, children, ...props }) =>
-  React.createElement(as || 'div', { className: 'card', ...props }, children)
+Card.Header = styled.header`
+  align-items: stretch;
+  justify-content: center;
+  min-height: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+`
 
-Card.Image = ({ src }) =>
-  <div className='card-image'>
-    <figure className='image is-square'>
-      <img src={src} alt={imageName(src)} />
-    </figure>
-  </div>
+Card.Header.Title = styled.p`
+  align-items: center;
+  color: #363636;
+  display: flex;
+  flex-grow: 1;
+  font-weight: 700;
+  padding: 0.75rem;
+`
 
-Card.Image.displayName = 'Card.Image'
+Card.Content = styled.div`
+  padding: 1.5rem;
+  color: #4a4a4a;
+  display: flex;
+  height: 100%;
+  min-height: 250px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+`
 
-Card.Header = ({ children }) =>
-  <div className='card-header'>
-    {children}
-  </div>
+Card.Footer = styled.footer`
+  border-top: 1px solid #dbdbdb;
+  align-items: stretch;
+  display: flex;
+`
 
-Card.Header.displayName = 'Card.Header'
-
-Card.Title = ({ children }) =>
-  <div className='card-header-title'>
-    {children}
-  </div>
-
-Card.Title.displayName = 'Card.Title'
-
-Card.Icon = ({ icon }) =>
-  <div className='card-header-icon'>
-    <i className={generateIcon(icon)}></i>
-  </div>
-
-Card.Icon.displayName = 'Card.Icon'
-
-Card.Content = ({ children }) =>
-  <div className='card-content'>
-    {children}
-  </div>
-
-Card.Content.displayName = 'Card.Content'
-
-Card.Meta = ({ image, title, subtitle }) =>
-  <div className='media'>
-    {image && <div className='media-left'>
-      <figure className='image is-48x48'>
-        <img src={image} alt='Image' />
-      </figure>
-    </div>}
-    <div className='media-content'>
-      {title && <p className='title is-4'>{title}</p>}
-      {subtitle && <p className='subtitle is-6'>{subtitle}</p>}
-    </div>
-  </div>
-
-Card.Meta.displayName = 'Card.Meta'
-
-Card.Description = ({ date, children }) =>
-  <div className='content'>
-    <strong>{children}</strong>
-    <br />
-    {date && <small className='is-small'>{date}</small>}
-  </div>
-
-Card.Description.displayName = 'Card.Description'
+Card.Footer.Item = styled.a`
+  align-items: center;
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: center;
+  padding: 0.75rem;
+  text-decoration: none;
+  &:not(:last-child) {
+    border-right: 1px solid #dbdbdb;
+  }
+`
 
 export default Card

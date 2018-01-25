@@ -1,3 +1,5 @@
+// @flow
+
 const initialState = {
   questions: [],
   answered: [],
@@ -6,14 +8,14 @@ const initialState = {
   error: null
 }
 
-const answerQuestion = (question, answer) =>
+const answerQuestion = ({ question, answer }) =>
   ({ ...question, answer })
 
-const getNextQuestion = (question, questionsState) =>
+const getNextQuestion = ({ question }, questionsState) =>
   questionsState[questionsState.indexOf(question) - 1] ?
   questionsState[questionsState.indexOf(question) - 1] : null
 
-export default function(state = initialState, action) {
+export default function(state: Object = initialState, action: Object) {
   switch (action.type) {
   case 'FETCH_QUIZ':
     return Object.assign({}, state, {
@@ -38,11 +40,11 @@ export default function(state = initialState, action) {
     return Object.assign({}, state, {
       answered: [
         ...state.answered,
-        answerQuestion(action.payload.question, action.payload.answer)
+        answerQuestion(action.payload)
       ],
-      active: getNextQuestion(action.payload.question, state.questions)
+      active: getNextQuestion(action.payload, state.questions)
     })
-  case 'REFRESH_QUIZ':
+  case 'RESET_QUIZ':
     return initialState
   default:
     return state

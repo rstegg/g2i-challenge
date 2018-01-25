@@ -1,17 +1,16 @@
-export const refreshQuiz = () =>
+// @flow
+
+export const resetQuiz = () =>
 ({
-  type: 'REFRESH_QUIZ'
+  type: 'RESET_QUIZ'
 })
 
-export const fetchQuiz = api =>
+export const fetchQuiz = () =>
 ({
-  type: 'FETCH_QUIZ',
-  payload: {
-    api
-  }
+  type: 'FETCH_QUIZ'
 })
 
-export const onFetchQuizSuccess = res =>
+export const onFetchQuizSuccess = (res: Object) =>
 ({
   type: 'FETCH_QUIZ_SUCCESS',
   payload: {
@@ -20,7 +19,7 @@ export const onFetchQuizSuccess = res =>
   }
 })
 
-export const onFetchQuizFailure = error =>
+export const onFetchQuizFailure = (error: String) =>
 ({
   type: 'FETCH_QUIZ_FAILURE',
   payload: {
@@ -28,7 +27,7 @@ export const onFetchQuizFailure = error =>
   }
 })
 
-export const setActiveQuestion = question =>
+export const setActiveQuestion = (question: String) =>
 ({
   type: 'SET_ACTIVE_QUESTION',
   payload: {
@@ -36,7 +35,7 @@ export const setActiveQuestion = question =>
   }
 })
 
-export const answerQuestion = (question, answer) =>
+export const answerQuestion = (question: String, answer: String) =>
 ({
   type: 'ANSWER_QUESTION',
   payload: {
